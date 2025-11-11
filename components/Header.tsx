@@ -85,4 +85,23 @@ export default function Header({ onMenuClick, totalEarnings }: HeaderProps) {
 
         init();
   }, []);
+
+   useEffect(() => {
+    const fetchNotifications = async () => {
+      if (userInfo && userInfo.email) {
+        const user = await getUserByEmail(userInfo.email);
+        if (user) {
+          const unreadNotifications = await getUnreadNotifications(user.id);
+          setNotifications(unreadNotifications);
+        }
+      }
+    };
+
+    fetchNotifications();
+
+    // Set up periodic checking for new notifications
+    const notificationInterval = setInterval(fetchNotifications, 30000); // Check every 30 seconds
+
+    return () => clearInterval(notificationInterval);
+  }, [userInfo]);
 }
