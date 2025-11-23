@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Inter } from 'next/font/google'
 import "./globals.css"
+// import Header from "@/components/Header"
 import Header from "@/components/Header"
 import Sidebar from "@/components/Sidebar"
 
